@@ -21,11 +21,18 @@ class Garage
     }
     public function SetAuto($a1)
     {
-       array_push($this->Auto,$a1) ;
+       $this->Auto[] = $a1 ;
     }
 function MostrarGarage()
 {
-    return "Razon Social :" . $this->_razonSocial . "<br>" . "precio: ". $this->_precio ; 
+    echo   "<br>" . "Razon Social :" . $this->_razonSocial . "<br>" . "precio: ". $this->_precio ;
+    
+    foreach($this->Auto as $item)
+    {
+      echo  $item ;
+    }
+    
+     
     // $auto = Auto::MostrarAuto() ;  
 }
 
@@ -58,7 +65,23 @@ function Add($G,$A)
     
 }
 
+function Remove($G,$A)
+{
+    $respuesta = "Auto No Eliminado" ;
+    if($this->Equals($G,$A))
+        for ($i=0; $i < count($this->Auto); $i++) 
+        { 
+            if($this->Auto[0] != "")
 
+            if($this->Auto[$i] == $A)
+           {
+                $respuesta = "Auto Eliminado" ;
+               $this->Auto[$i] = 0;
+            break ;
+            }
+        }  
+        echo "<br>" . $respuesta ;
+}
 
 
 

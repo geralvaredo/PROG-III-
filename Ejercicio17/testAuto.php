@@ -11,6 +11,7 @@ $Auto4 = new Auto("Ferrari","Azul",15000) ;
 $Auto5 = new Auto("Ford","Negro",11000,date("Y-m-d")) ;
 //var_dump($Auto1) ;
 
+/*
 echo Auto::MostrarAuto($Auto1) ;
 echo Auto::MostrarAuto($Auto2) ;
 echo Auto::MostrarAuto($Auto3) ;
@@ -38,4 +39,5 @@ if(Auto::Equals($Auto1,$Auto5))
 echo "Son Iguales" . "<br>" ;
 else
 echo "Son Distintos" . "<br>" ;
+*/
 ?>
