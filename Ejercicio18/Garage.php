@@ -23,17 +23,14 @@ class Garage
     {
        $this->Auto[] = $a1 ;
     }
-function MostrarGarage()
-{
-    echo   "<br>" . "Razon Social :" . $this->_razonSocial . "<br>" . "precio: ". $this->_precio ;
+function MostrarGarage(){
+    	$rta = null;
+	$rta = "<br>" . "Razon Social :" . $this->_razonSocial . "<br>" . "precio: ". $this->_precio . "<br><br>" ;
     
-    foreach($this->Auto as $item)
-    {
-      echo  $item ;
+    foreach($this->Auto as $item) {
+	    $rta .=  $item->ToString()  ;
     }
-    
-     
-    // $auto = Auto::MostrarAuto() ;  
+    return $rta;
 }
 
 function Equals ($g1,$a1)
@@ -41,46 +38,40 @@ function Equals ($g1,$a1)
     $respuesta = false ;
     foreach ($g1->GetAuto() as  $item) 
     {
-       if( $item == $a1 )
-
-        {
+       if($item == $a1 ){
            $respuesta = true ;
             break ;
         }
-        
     }
     return $respuesta ;
 }
 
-function Add($G,$A) 
-{
-    if(!$this->Equals($G,$A))
-   { $this->SetAuto($A) ;
-    echo "El Auto Fue ingresado Exitosamente" ;
-   }
-    else
-    {
-    echo "El Auto Ya Existe" ;
+function Add($G, $A){
+    if(!$this->Equals($G,$A)){
+    	$this->SetAuto($A);
+        echo "El Auto Fue ingresado Exitosamente" . "<br>";
+    }else{
+        echo "El Auto Ya Existe";
     }
-    
 }
 
 function Remove($G,$A)
 {
     $respuesta = "Auto No Eliminado" ;
     if($this->Equals($G,$A))
-        for ($i=0; $i < count($this->Auto); $i++) 
-        { 
-            if($this->Auto[0] != "")
+
+       for ($i=0; $i < count($this->Auto); $i++) { 
 
             if($this->Auto[$i] == $A)
-           {
-                $respuesta = "Auto Eliminado" ;
-               $this->Auto[$i] = 0;
-            break ;
+            {
+                $respuesta = "Auto " . $A->_marca . " " . $A->_color .  " Eliminado" ;
+                $this->Auto[$i] = 0;
+                break;
             }
-        }  
-        echo "<br>" . $respuesta ;
+
+       }
+        
+        return $respuesta ;
 }
 
 
