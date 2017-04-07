@@ -11,8 +11,8 @@ class Vuelo
     private $_fecha;
     private $_precio ;
     private $_empresa ;
-    private $_listaDePasajeros = array(); 
-    private $_cantMaxima ;
+    public $_listaDePasajeros = array(); 
+    public $_cantMaxima ;
 
     function getFecha()
     {
@@ -44,16 +44,52 @@ class Vuelo
 
     function infoVuelo()
     {
-        return "<br>" . $this->getFecha() . "<br>" . $this->getEmpresa() .
-        "<br>" . $this->getPrecio() . "<br>" . $this->getListaPasajeros() . "<br>" . $this->getCantidad() ;
+        $cadena = "<br>" . $this->getFecha() . "<br>" . $this->getEmpresa() .
+        "<br>" . $this->getPrecio() . "<br>"  . $this->getCantidad() . "<br>" ;
+
+        foreach ($this->_listaDePasajeros as $item) {
+            $cadena .= $item->GetinfoPasajero()  ;
+
+        }
+        return $cadena ;
     }
     function AgregarPasajero($p)
     {
-        if(!$p->Equals() && $count($_listaDePasajeros) < $p->getCantidad() )
-        {   
+        $respuesta = "No se Agrego" ;
+        if(!$p->Equals($p) && count($this->_listaDePasajeros) < $p->getCantidad() ) {   
 
+            $respuesta = "Se Agrego" ;
+            $_listaDePasajeros[] = $p ;
+
+            }
+            return $respuesta ;
+    }
+
+
+    public static function  Add ($v1,$v2)
+    {
+        if($v1->esplus)
+        return $total = ($v1->getPrecio() + $v2->getPrecio()* 0.2) ;
+        else
+        return $total = ($v1->getPrecio() + $v2->getPrecio()) ;
+    }
+
+    public static function Remove($p1,$v1)
+    {
+        $respuesta = "Pasajero No Encontrado" ;
+        for ($i=0; $i <count($v1->_listaDePasajeros) ; $i++)    { 
+            if($v1->_listaDePasajeros[$i] == $p1){
+                
+                $respuesta = "Pasajero Fuera del Vuelo" ;
+                $v1->_listaDePasajeros[$i] = 0 ;
+                break;
+            } 
+        
+        
+        
         }
-
+        return $respuesta ;
+    
     }
 
 }

@@ -38,7 +38,7 @@
                 "<br>" . $this->GetPlus() ;
             }
 
-        function __construct($nombre, $apellido, $dni, $plus)
+        function __construct($nombre = NULL, $apellido = NULL, $dni= NULL, $plus= NULL)
         {
             $this->_nombre = $nombre ;
             $this->_apellido = $apellido ;
@@ -46,12 +46,13 @@
             $this->_esPlus = $plus ;
         }
 
-        function Equals($p1,$p2)
+        function Equals($p1)
         {
+            $p2 = new Pasajero() ;
             if($p1->GetDni() == $p2->GetDni() )
             return true ;
             else
-            return false
+            return false ;
         }
 
 
