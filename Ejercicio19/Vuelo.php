@@ -73,15 +73,9 @@ class Vuelo
     }
 
 
-    public static function Add ($v1,$v2)
+    public  function Add ($v1,$v2)
     {
-        return $valor = sumar($v1,$v2) ;
-
-
-       }
-       
-        function sumar($v1,$v2)
-       {
+        //return $valor = sumar($v1,$v2) ;
             $totalv1 = 0 ;
             $totalv2 = 0 ;
             $TotalVuelo = 0 ; 
@@ -106,9 +100,11 @@ class Vuelo
         }
 
         return $TotalVuelo = $totalv1 + $totalv2 ;
+ 
 
-    
        }
+       
+       
         
         
     
@@ -119,7 +115,7 @@ class Vuelo
         for ($i=0; $i <count($v1->_listaDePasajeros) ; $i++)    { 
             if($v1->_listaDePasajeros[$i] == $p1){
                 
-                $respuesta = "Pasajero Fuera del Vuelo" ;
+                $respuesta = "Pasajero: " . $p1->getNombre() .  " Fuera del Vuelo" ;
                 $v1->_listaDePasajeros[$i] = 0 ;
                 break;
             } 

@@ -20,20 +20,12 @@ $v1 = new Vuelo("Avianca",14000,3) ;
 $v2= new Vuelo ("Iberia",16000,1) ;
 
 
-
-
-
-
-
-
 echo $v1->AgregarPasajero($p1) ;
 echo $v2->AgregarPasajero($p2) ;
 echo $v1->AgregarPasajero($p3) ;
 echo $v2->AgregarPasajero($p4) ;
 echo $v1->AgregarPasajero($p5) ;
-//echo "<pre>" ;
-//print_r($v1->_listaDePasajeros);
-//echo "</pre>" ;
+
 
 //echo "<pre>" ;
 //print_r($v2->_listaDePasajeros);
@@ -42,6 +34,12 @@ echo $v1->AgregarPasajero($p5) ;
 echo $v1->infoVuelo() ;
 echo $v2->InfoVuelo() ;
 
- $v1->Add($p1,$p2);
+  $v1->Add($p1,$p2);
+
+echo $v1->Remove($p1,$v1) ;
+
+//echo "<pre>" ;
+//print_r($v1->_listaDePasajeros);
+//echo "</pre>" ;
 
 ?>
