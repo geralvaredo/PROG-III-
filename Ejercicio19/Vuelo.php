@@ -53,26 +53,65 @@ class Vuelo
         }
         return $cadena ;
     }
-    function AgregarPasajero($p)
+    function AgregarPasajero($p1)
     {
-        $respuesta = "No se Agrego" ;
-        if(!$p->Equals($p) && count($this->_listaDePasajeros) < $p->getCantidad() ) {   
+           $respuesta = "No se Agrego" ;
+                
+            
+     if($this->_listaDePasajeros != " ")
 
-            $respuesta = "Se Agrego" ;
-            $_listaDePasajeros[] = $p ;
+      if($this->_listaDePasajeros != $p1 && count($this->_listaDePasajeros) < $this->getCantidad() )
+           {  
+                     $respuesta = "Se Agrego" ;
+                  $this->_listaDePasajeros[] = $p1 ;
+           }            
+                 
+              
 
-            }
-            return $respuesta ;
+      return $respuesta .= " el Pasajero : " .   $p1->GetNombre() . " Al Vuelo: " .
+          $this->getEmpresa() . "<br>"  ;
     }
 
 
-    public static function  Add ($v1,$v2)
+    public static function Add ($v1,$v2)
     {
-        if($v1->esplus)
-        return $total = ($v1->getPrecio() + $v2->getPrecio()* 0.2) ;
-        else
-        return $total = ($v1->getPrecio() + $v2->getPrecio()) ;
-    }
+        return $valor = sumar($v1,$v2) ;
+
+
+       }
+       
+        function sumar($v1,$v2)
+       {
+            $totalv1 = 0 ;
+            $totalv2 = 0 ;
+            $TotalVuelo = 0 ; 
+            foreach ($v1->_listaDePasajeros as $item) {
+            
+            if($item->esPlus)
+            $totavl += $item->getPrecio() *0.2 ;
+            else
+            $totalv1 += $item->getPrecio()  ;
+
+            break;
+        }
+
+        foreach ($v2->_listaDePasajeros as $item) {
+            
+            if($item->esPlus)
+            $totalv2 += $item->getPrecio() *0.2 ;
+            else
+            $totalv2 += $item->getPrecio()  ;
+
+            break;
+        }
+
+        return $TotalVuelo = $totalv1 + $totalv2 ;
+
+    
+       }
+        
+        
+    
 
     public static function Remove($p1,$v1)
     {
