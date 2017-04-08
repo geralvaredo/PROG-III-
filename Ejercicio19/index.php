@@ -34,7 +34,7 @@ echo $v1->AgregarPasajero($p5) ;
 echo $v1->infoVuelo() ;
 echo $v2->InfoVuelo() ;
 
-  $v1->Add($p1,$p2);
+  Vuelo::Add($p1,$p2);
 
 echo $v1->Remove($p1,$v1) ;
 
