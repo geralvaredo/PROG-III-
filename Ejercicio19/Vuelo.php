@@ -75,13 +75,6 @@ class Vuelo
 
     public static function Add ($v1,$v2)
     {
-        return $valor = sumar($v1,$v2) ;
-
-
-       }
-       
-        function sumar($v1,$v2)
-       {
             $totalv1 = 0 ;
             $totalv2 = 0 ;
             $TotalVuelo = 0 ; 
@@ -107,9 +100,16 @@ class Vuelo
 
         return $TotalVuelo = $totalv1 + $totalv2 ;
 
+
+       }
+       
+      /*  function sumar($v1,$v2)
+       {
+            
+
     
        }
-        
+        */
         
     
 
