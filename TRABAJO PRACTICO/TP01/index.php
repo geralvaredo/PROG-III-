@@ -9,20 +9,26 @@
     //echo  $emp1->ToString() ;
     
     //$emp1->Hablar("Español") ;
-    echo "<br>" ;
+    
     $fabrica1 = new Fabrica("Shohoku") ;
+    
     $fabrica1->AgregarEmpleado($emp1);    
     $fabrica1->AgregarEmpleado($emp2);
     $fabrica1->AgregarEmpleado($emp3);
     $fabrica1->AgregarEmpleado($emp1);
-     echo $fabrica1->ToString();
+        echo "<pre>" ;
+    print_r($fabrica1->ToString());
+    echo "</pre>" ;
+    
+     //echo $fabrica1->ToString();
 
      echo "Sueldo :" .  $fabrica1->CalcularSueldos() . "<br>";
 
      echo "----------------------CAMBIOS--------------------------------" ;
 
      $fabrica1->EliminarEmpleado($emp2) ;
-    // $fabrica1->EliminarEmpleadoRepetidos();
+     echo "<br>" ;
+     //$fabrica1->EliminarEmpleadoRepetidos();
     
      echo $fabrica1->ToString();
      

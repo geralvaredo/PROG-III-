@@ -17,7 +17,9 @@ class Fabrica
 
     public function AgregarEmpleado($e)
     {
+         
         array_push($this->_empleados,$e) ;
+        $this->EliminarEmpleadoRepetidos() ;  
 
     }
     public function CalcularSueldos()
@@ -45,11 +47,11 @@ class Fabrica
             
     }
 
-    public function EliminarEmpleadoRepetidos()
+     private function EliminarEmpleadoRepetidos()
     {
-       //print_r(array_unique($this->_empleados)) ;
-               
-            
+         
+        $this->_empleados = array_unique($this->_empleados,SORT_REGULAR) ;
+    
         
       
     }
@@ -57,14 +59,21 @@ class Fabrica
 
     public function ToString()
     {
-        $cadena = "<br>" . "Razon Social :" . $this->_razonSocial . "<br>" ;
+        $cadena = "<br>" . "Razon Social :" . $this->_razonSocial . "<br>"  ;
 
         foreach ($this->_empleados as $item) {
             
-            $cadena .= $item->ToString() . "<br>";
+            $cadena .=  "<br>" . $item->ToString() . "<br>";
         }
         return $cadena ;
     }
+
+
+
+
+
+
+
 
 }
 
