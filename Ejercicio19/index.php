@@ -9,7 +9,7 @@ $p4 = new Pasajero("Juan Roman", "Riquelme","20159753",false) ;
 
 $p5 = new Pasajero("Chicho", "Serna","20159753",false) ;
 
-
+//Agrego pasajeros a un vuelo
 /*Pasajero::MostrarPasajero($p1) ;
 Pasajero::MostrarPasajero($p2) ;
 Pasajero::MostrarPasajero($p3) ;
