@@ -6,7 +6,7 @@ class Horarios
 	public $ingreso;
 	public $egreso;  
   	
-	  public static function traerEmpleados()
+	  public static function traerHorarios()
 	  {
 			  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			  $consulta =$objetoAccesoDato->RetornarConsulta("select IdEmpleado as empleado ,fecha , ingreso , egreso from horarios");

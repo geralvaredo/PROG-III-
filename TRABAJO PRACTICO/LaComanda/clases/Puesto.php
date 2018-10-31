@@ -3,14 +3,13 @@ class Puesto
 {
 	public $id;
  	public $nombre;
-  	public $idPuesto;
-  	
-	  public static function traerEmpleados()
+  	  	
+	  public static function traerPuestos()
 	  {
 			  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			  $consulta =$objetoAccesoDato->RetornarConsulta("select Id,Nombre as nombre, IdPuesto as puesto from empleado");
+			  $consulta =$objetoAccesoDato->RetornarConsulta("select Id,Nombre as nombre from puesto");
 			  $consulta->execute();			
-			  return $consulta->fetchAll(PDO::FETCH_CLASS, "empleado");		
+			  return $consulta->fetchAll(PDO::FETCH_CLASS, "puesto");		
 	  }
 /*
   	public function BorrarUsuario()

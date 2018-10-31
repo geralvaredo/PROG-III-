@@ -7,12 +7,13 @@ class Pedido
 	public $tiempo;
 	public $producto;
 	public $cantidad ;
-	  public static function traerEmpleados()
+	
+	  public static function traerPedido()
 	  {
 			  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			  $consulta =$objetoAccesoDato->RetornarConsulta("select Id,Nombre as nombre, IdPuesto as puesto from empleado");
+			  $consulta =$objetoAccesoDato->RetornarConsulta("select id,mesa, estado, tiempo, producto , cantidad from pedido");
 			  $consulta->execute();			
-			  return $consulta->fetchAll(PDO::FETCH_CLASS, "empleado");		
+			  return $consulta->fetchAll(PDO::FETCH_CLASS, "pedido");		
 	  }
 /*
   	public function BorrarUsuario()

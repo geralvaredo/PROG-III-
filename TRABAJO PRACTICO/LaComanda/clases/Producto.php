@@ -1,16 +1,17 @@
 <?php
 class Producto
 {
-	public $id;
- 	public $nombre;
-  	public $idPuesto;
+	public $codigo;
+ 	public $descripcion;
+	public $precio;
+	public $stock;
   	
-	  public static function traerEmpleados()
+	  public static function traerProductos()
 	  {
 			  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			  $consulta =$objetoAccesoDato->RetornarConsulta("select Id,Nombre as nombre, IdPuesto as puesto from empleado");
+			  $consulta =$objetoAccesoDato->RetornarConsulta("select codigo,descripcion, precio, stock from producto");
 			  $consulta->execute();			
-			  return $consulta->fetchAll(PDO::FETCH_CLASS, "empleado");		
+			  return $consulta->fetchAll(PDO::FETCH_CLASS, "producto");		
 	  }
 /*
   	public function BorrarUsuario()

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2018 a las 16:08:55
+-- Tiempo de generación: 31-10-2018 a las 21:56:52
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -61,11 +61,19 @@ INSERT INTO `empleado` (`Id`, `Nombre`, `IdPuesto`) VALUES
 
 CREATE TABLE `encuesta` (
   `id` int(11) NOT NULL,
+  `IdPedido` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   `resto` int(11) DEFAULT NULL,
   `cocinero` int(11) DEFAULT NULL,
   `mozo` int(11) DEFAULT NULL,
   `comentario` varchar(500) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `encuesta`
+--
+
+INSERT INTO `encuesta` (`id`, `IdPedido`, `resto`, `cocinero`, `mozo`, `comentario`) VALUES
+(1, 'COM-001', 8, 8, 7, 'buena atencion');
 
 -- --------------------------------------------------------
 
@@ -125,8 +133,15 @@ CREATE TABLE `horarios` (
 
 CREATE TABLE `mesa` (
   `Id` int(11) NOT NULL,
-  `IdPedido` int(11) NOT NULL
+  `IdPedido` varchar(10) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `mesa`
+--
+
+INSERT INTO `mesa` (`Id`, `IdPedido`) VALUES
+(1, 'COM-001');
 
 -- --------------------------------------------------------
 
@@ -143,6 +158,14 @@ CREATE TABLE `pedido` (
   `cantidad` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id`, `mesa`, `estado`, `tiempo`, `producto`, `cantidad`) VALUES
+('COM-001', 1, 1, '30', 1, 1),
+('COM-001', 1, 1, '30', 2, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -155,6 +178,15 @@ CREATE TABLE `producto` (
   `precio` int(11) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`codigo`, `descripcion`, `precio`, `stock`) VALUES
+(1, 'vino Salentein', 600, 10),
+(2, 'empanadas', 20, 100),
+(3, 'cerveza Patagonia', 30, 200);
 
 -- --------------------------------------------------------
 
@@ -233,7 +265,7 @@ ALTER TABLE `empleado`
 -- AUTO_INCREMENT de la tabla `encuesta`
 --
 ALTER TABLE `encuesta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -245,7 +277,7 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `puesto`
