@@ -4,9 +4,9 @@ include("empleadoAPI.php");
 
 $caso = $_SERVER['REQUEST_METHOD'];
 $entidad = $_SERVER['REQUEST_URI'] ;
-switch ($entidad) {
-    case '/empleado': 
-                     
+switch ($caso) {
+    case 'GET': 
+                echo "hola";     
         break;
     case 'POST':
                 header('Location:' . $entidad);

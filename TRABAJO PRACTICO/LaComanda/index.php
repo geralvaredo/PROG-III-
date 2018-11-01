@@ -3,7 +3,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 require_once './vendor/autoload.php';
-require_once 
+require_once ("clases/EmpleadoAPI.php");
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
@@ -31,23 +31,50 @@ $app->get('[/]', function (Request $request, Response $response) {
 COMPLETAR POST, PUT Y DELETE
 */
 
-$app->group('/comandaAPI', function() use ($app){
-     $app->group('/empleado',function() use ($app) {
-         $app->get('/listar','listarEmpleados');
-
-     });
-  });
 
 
 $app->post('/empleado', function (Request $request, Response $response) {    
     $response->getBody()->write("Listado De Empleados:");
-    $objeto = new Empleado();
+    $objeto = new EmpleadoAPI();    
+    return $empleados = $objeto->listar($request,$response) ; 
+});
 
-    $newRes = $response
-    return $response;
+$app->post('/empleado/{id}', function (Request $request, Response $response,$args) {    
+    $id = $args['id'];
+    $response->getBody()->write("Listado De Empleados:");
+    $objeto = new EmpleadoAPI();    
+    return $empleados = $objeto->listarEmpleado($request,$response,$id) ; 
+});
+
+$app->post('/insertar', function (Request $request, Response $response) {    
+    $obj = $request->getParsedBody();
+    $nombre = $obj['nombre'];
+    $idPuesto = $obj['idPuesto'];
+    $objeto = new EmpleadoAPI();
+    $objeto->nombre = $nombre ;   
+    $objeto->IdPuesto = $idPuesto ;
+    return $empleados = $objeto->insertarEmpleado($request,$response,$objeto) ;
+});
+
+$app->delete('/empleado/{id}', function (Request $request, Response $response, $args) {    
+    $id = $args['id'];    
+    $objeto = new EmpleadoAPI();    
+    return $empleados = $objeto->borrarEmpleado($request,$response,$id) ;
 
 });
 
+$app->put('/empleado', function (Request $request, Response $response) {    
+    $obj = $request->getParsedBody();
+    $nombre = $obj['nombre'];
+    $idPuesto = $obj['idPuesto'];
+    $objeto = new EmpleadoAPI();
+    $objeto->nombre = $nombre;
+    $objeto->IdPuesto = $idPuesto ;
+    return $empleados = $objeto->modificarEmpleado($request,$response,$objeto);
+
+});
+
+/*
 $app->put('/empleado', function (Request $request, Response $response) {    
     $response->getBody()->write("Listado De Empleados:");
     
@@ -61,7 +88,7 @@ $app->delete('/empleado', function (Request $request, Response $response) {
     return $response;
 
 });
-
+*/
 
 /*
 MAS CODIGO AQUI...

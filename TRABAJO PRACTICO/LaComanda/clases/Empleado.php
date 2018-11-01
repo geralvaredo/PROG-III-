@@ -1,17 +1,52 @@
 <?php
+include("clases/AccesoDatos.php");
 class Empleado
 {
 	public $id;
  	public $nombre;
   	public $idPuesto;
   	
-	  public static function traerEmpleados()
-	  {
+	  public static function traerEmpleados(){
 			  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			  $consulta =$objetoAccesoDato->RetornarConsulta("select Id,Nombre as nombre, IdPuesto as puesto from empleado");
 			  $consulta->execute();			
 			  return $consulta->fetchAll(PDO::FETCH_CLASS, "empleado");		
 	  }
+
+	  public static function listarPorId($id){		  	  	
+			  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			  $consulta =$objetoAccesoDato->RetornarConsulta("select Id,Nombre as nombre, IdPuesto as puesto from empleado WHERE Id= $id");
+			  $consulta->execute();
+			  return $empleadoBuscado = $consulta->fetch(); 
+			   	  		
+	  }
+	  public static function borrarPorId($id){ 
+			 $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			 $consulta =$objetoAccesoDato->RetornarConsulta("
+				 delete 
+				 from empleado 				
+				 WHERE Id= $id");	
+				 $consulta->execute();
+				 return $empleadoBorrado = $consulta->rowCount();
+	  }
+	  public static function insertar($obj){
+		  		 $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+				 $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into empleado (Nombre,IdPuesto)values('$obj->nombre',$obj->IdPuesto)");
+				 $consulta->execute();
+				 return $consulta->fetch(); 
+ } 
+ 
+ 	  public static function modificar($obj){
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta =$objetoAccesoDato->RetornarConsulta("
+				update empleado 
+				set Nombre='$obj->nombre',
+				IdPuesto = '$obj->IdPuesto',
+				WHERE Id='$obj->Id'");
+			 $consulta->execute();
+			return $consulta->fetch();
+}
+	  
 /*
   	public function BorrarUsuario()
 	 {
@@ -25,8 +60,8 @@ class Empleado
 				$consulta->execute();
 				return $consulta->rowCount();
 
-	 }*/
-	 	/*public static function BorrarUsuarioPorAnio($año)
+}*//*
+	 	public static function BorrarUsuarioPorAnio($año)
 	 {
 
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
@@ -80,7 +115,8 @@ class Empleado
 				return $objetoAccesoDato->RetornarUltimoIdInsertado();
 				
 
-}*//*
+}*/
+/*
 	 public function InsertarElCdParametros()
 	 {
 				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
@@ -90,9 +126,9 @@ class Empleado
 				
 				$consulta->execute();		
 				return $objetoAccesoDato->RetornarUltimoIdInsertado();
-	 }*/
-	 
- 	
+	 }
+	 */
+	  	
 /*
 	public static function TraerUnCd($id) 
 	{
@@ -103,8 +139,8 @@ class Empleado
 			return $cdBuscado;				
 
 			
-	}
-*//*
+	}*/
+/*
 	public static function TraerUnCdAnio($id,$anio) 
 	{
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
