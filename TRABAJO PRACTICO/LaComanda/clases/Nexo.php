@@ -1,32 +1,36 @@
 <?php  
-include("AccesoDatos.php");
-include("empleadoAPI.php");
+//include("clases/AccesoDatos.php");
+//include("empleadoAPI.php");
 
 $caso = $_SERVER['REQUEST_METHOD'];
-$entidad = $_SERVER['REQUEST_URI'] ;
+$url = $_SERVER['REQUEST_URI'] ;
+$entidad = $_SERVER ['entidad'] ;
 switch ($caso) {
     case 'GET': 
-                echo "hola";     
+                echo "HOLA GET"; 
+                 echo $entidad ;    
         break;
     case 'POST':
-                header('Location:' . $entidad);
+               echo "POST";
         break;
     case 'PUT':
-                header('Location:' . $entidad);
+                echo "PUT";
+                //header('Location:' . $entidad);
         break;
     case 'DELETE':
-                header('Location:' . $entidad);
+                  echo "DELETE";     
+                //header('Location:' . $entidad);
         break; 
         default:
     
         break;
 }
-
+/*
 echo "<pre>" ;
 print_r(Empleado::traerEmpleados());
 echo "</pre>" ;
 echo "<pre>" ;
 print_r(Encuesta::traerEncuesta());
 echo "</pre>" ;
-
+*/
 ?>

@@ -30,14 +30,16 @@ $app->get('[/]', function (Request $request, Response $response) {
 /*
 COMPLETAR POST, PUT Y DELETE
 */
-
-
-
-$app->post('/empleado', function (Request $request, Response $response) {    
-    $response->getBody()->write("Listado De Empleados:");
-    $objeto = new EmpleadoAPI();    
-    return $empleados = $objeto->listar($request,$response) ; 
+$app->group("/empleado", function(){
+    $this->post("/",\EmpleadoAPI::class . ':listar');
+    $this->post("/{id}",\EmpleadoAPI::class . ':listarEmpleado');
+    //$this->post("/insertar",\EmpleadoAPI::class . ':insertarEmpleado');
+    $this->delete("/{id}",\EmpleadoAPI::class . ':borrarEmpleado');
+    $this->put("/",\EmpleadoAPI::class . ':modificarEmpleado');
 });
+
+/*
+
 
 $app->post('/empleado/{id}', function (Request $request, Response $response,$args) {    
     $id = $args['id'];
@@ -73,7 +75,7 @@ $app->put('/empleado', function (Request $request, Response $response) {
     return $empleados = $objeto->modificarEmpleado($request,$response,$objeto);
 
 });
-
+*/
 /*
 $app->put('/empleado', function (Request $request, Response $response) {    
     $response->getBody()->write("Listado De Empleados:");

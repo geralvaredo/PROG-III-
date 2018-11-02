@@ -37,14 +37,15 @@ class Empleado
  } 
  
  	  public static function modificar($obj){
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		/*	
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta("
 				update empleado 
 				set Nombre='$obj->nombre',
 				IdPuesto = '$obj->IdPuesto',
-				WHERE Id='$obj->Id'");
+				WHERE Id='$obj->id'");
 			 $consulta->execute();
-			return $consulta->fetch();
+			return $consulta->fetch();*/
 }
 	  
 /*
