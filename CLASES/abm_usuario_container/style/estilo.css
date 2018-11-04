@@ -1,0 +1,68 @@
+
+body
+{
+ background-color: #FFE082;
+}
+h1
+{
+  color: black;
+    
+}
+p
+{
+    margin-top: 10px;
+    text-align: center;
+    color:  #3498db  ;
+    font-weight: bold;
+    font-size: 200%;
+}
+.volver
+{
+   text-align: center; 
+}
+.listado-usuario
+{
+    
+}
+.tabla-container
+{
+    
+}
+.sesion
+{      
+  margin-left: 60px;        
+  background-color: MidnightBlue;
+  padding: 10px 15px;
+  color: white;
+  font-weight: bold;
+    
+
+}
+.sesion:hover
+{
+    background-color: crimson;
+}
+.botones
+{
+    background-color: #179b77;
+    padding: 15px 15px;
+    color: white;
+    font-weight: bold;
+}
+
+.formulario
+{
+   width:250px;
+   margin-left: 400px;
+   text-align: center;
+   
+}
+.table tr:hover
+{
+  background-color: #20B2AA;
+}
+.table th
+{
+    color: black;
+}
+
