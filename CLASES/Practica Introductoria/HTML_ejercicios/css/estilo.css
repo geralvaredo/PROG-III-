@@ -1,0 +1,86 @@
+/* <----------------A-------------->  
+1-PROPIEDAD background-repeat: 
+		no-repeat:	PARA NO REPETIR IMAGEN
+		 
+ 2- PROPIEDAD background-attachment: 
+	  		fixed: pantalla fija y arreglada
+			scroll: la imagen se mueve con la ruedita  
+	<----------------A-------------->  
+
+	<----------------B-------------->  
+	1- PROPIEDAD width:
+		  px o % : ASEGURA LA PANTALLA DE LARGO
+	 	
+	2- PROPIEDAD height: 
+	      px o % : ASEGURA LA PANTALLA DE ANCHO
+	 
+	3- PROPIEDAD list-style: 
+		 none: no lista en vertical los objetos
+	<----------------B-------------->  
+ 	
+	 <----------------C-------------->  
+ 1- PROPIEDAD DISPLAY
+	inline-block : MENU LISTADO EN LINEA RECTA 
+	<----------------C-------------->  
+	
+	<----------------D-------------->  
+1- PROPIEDAD PADDING
+ li a : MARGENES ENTRE BOTONES (Y,X)
+<----------------D--------------> 
+	*/
+body
+{ /*A*/
+	background-image: url("../css/bg.jpg");
+	background-repeat: no-repeat; 
+	background-attachment: fixed; 
+	background-position: center ;
+	background-size: 1370px 800px;
+
+	
+}
+
+ 
+.menu 
+{/*B*/
+	width: 550px; 
+	height: 40px; 
+	list-style: none ;	
+	margin:0; 
+	padding: 0;
+
+	border: 4px solid white;
+}
+
+.menu li
+{/*C*/
+	
+	display: inline-block; 
+	
+}
+
+.menu li input
+{
+	/*D*/
+ 	padding : 10px 30px;	
+	display: inline-block;
+	color:white; 
+	
+}
+input[type=submit]
+{
+    width: 180px;
+	height: 40px;
+   background: skyblue;
+}
+
+
+.menu li input:hover
+{
+	background:orange; 
+}
+
+
+
+
+
+
