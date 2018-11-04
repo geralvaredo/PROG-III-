@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <title>ABM CON AJAX Y WS</title>
+        <style type="text/css">
+            
+            * {
+                margin:0px;
+                padding:0px;
+            }
+            
+            #header {
+                margin:auto;
+                width:500px;
+                font-family:Arial, Helvetica, sans-serif;
+            }
+            
+            ul, ol {
+                list-style:none;
+            }
+            
+            .nav > li {
+                float:left;
+            }
+            
+            .nav li a {
+                background-color:#000;
+                color:#fff;
+                text-decoration:none;
+                padding:10px 12px;
+                display:block;
+            }
+            
+            .nav li a:hover {
+                background-color:#434343;
+            }
+            
+            .nav li ul {
+                display:none;
+                position:absolute;
+                min-width:140px;
+            }
+            
+            .nav li:hover > ul {
+                display:block;
+            }
+            
+            .nav li ul li {
+                position:relative;
+            }
+            
+            .nav li ul li ul {
+                right:-140px;
+                top:0px;
+            }
+            div#QueMostrar{
+                margin: 0 auto;
+                                margin-top: 50px;
+                width: 640px;
+                height: 200px;
+
+                
+            }
+            
+        </style>
+    </head>
+    <body>
+
+
+        <div id="header">
+    
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="js/funcionesLogin.js"></script>
+            <ul class="nav">
+                <li><a  onclick ="QueMostrar('MostrarLogin')">Login</a></li>
+                <li><a  onclick ="MostrarGrilla()">Grilla</a>
+                
+                <li><a href="">Acerca de</a>
+                
+                <li><a href="">Contacto</a></li>
+
+
+     </ul>
+        
+ 
+        </div>
+   
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="js/funcionesLogin.js"></script>
+  <div id="QueMostrar" style="height:610px;overflow:auto;border-style:solid">
+    </body>
+
+</html>
+
