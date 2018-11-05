@@ -31,16 +31,14 @@ $app->get('[/]', function (Request $request, Response $response) {
 COMPLETAR POST, PUT Y DELETE
 */
 $app->group("/empleado", function(){
-    $this->post("/",\EmpleadoAPI::class . ':listar');
+    $this->get("/",\EmpleadoAPI::class . ':listar');
     $this->post("/{id}",\EmpleadoAPI::class . ':listarEmpleado');
-    //$this->post("/insertar",\EmpleadoAPI::class . ':insertarEmpleado');
+    $this->post("/",\EmpleadoAPI::class . ':insertarEmpleado');
     $this->delete("/{id}",\EmpleadoAPI::class . ':borrarEmpleado');
     $this->put("/",\EmpleadoAPI::class . ':modificarEmpleado');
 });
 
 /*
-
-
 $app->post('/empleado/{id}', function (Request $request, Response $response,$args) {    
     $id = $args['id'];
     $response->getBody()->write("Listado De Empleados:");

@@ -27,27 +27,27 @@ class EmpleadoAPI extends Empleado implements IApiEmpleado
 
     public function insertarEmpleado($request, $response){
         $obj = $request->getParsedBody();
-        //$p = new Empleado();
-        //$p->nombre = $obj['nombre'] ;
-        //echo $p->nombre;
-        /*$p->nombre = $args['nombre'];
-        $p->idPuesto = $args['idPuesto'];
-        echo $p->nombre ;   -*/      
-        /*$persona = Empleado::insertar($p);
+       // var_dump($obj);
+        $p = new Empleado();
+        $p->nombre = $obj['nombre'] ;
+        $p->idPuesto = $obj['idPuesto'] ;     
+        var_dump($p);             
+        $persona = Empleado::insertar($p);
         $newResponse = $response->withJson($persona,200);
-        return $newResponse;*/ 
+        return $newResponse;
     }
     
     public function modificarEmpleado($request, $response){
-        $obj = $request->getParsedBody();        
-        var_dump($obj);
-        $empleado = new Empleado();         
-         $empleado->id = $obj['id'] ;          
-          $empleado->nombre = $obj['nombre'];
-         $empleado->idPuesto = $obj['idPuesto'];
-        //$persona = Empleado::modificar($empleado);
-        //$newResponse = $response->withJson($persona,200);
-       // return $newResponse;
+        // para realizar el put en el postman se debe realizar en el body como 'x-www-form-urlencoded'
+        // para obtener los parametros se usa getContents
+        $obj = explode("&",$request->getBody()->getContents()) ;               
+        $empleado = new Empleado();              
+        $empleado->id = substr($obj[0],3);          
+        $empleado->nombre =  substr($obj[1],7);
+        $empleado->idPuesto = substr($obj[2],9);
+        $persona = Empleado::modificar($empleado);
+        $newResponse = $response->withJson($persona,200);
+        return $newResponse;
     }
 
 }

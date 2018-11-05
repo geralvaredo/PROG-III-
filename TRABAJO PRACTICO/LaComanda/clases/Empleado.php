@@ -31,21 +31,21 @@ class Empleado
 	  }
 	  public static function insertar($obj){
 		  		 $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-				 $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into empleado (Nombre,IdPuesto)values('$obj->nombre',$obj->IdPuesto)");
+				 $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into empleado (Nombre,IdPuesto)values('$obj->nombre','$obj->idPuesto')");
 				 $consulta->execute();
 				 return $consulta->fetch(); 
  } 
  
- 	  public static function modificar($obj){
-		/*	
+ 	  public static function modificar($obj){			
+		var_dump($obj);
+		var_dump($obj->id);
+		var_dump($obj->nombre);
+		var_dump($obj->idPuesto);
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("
-				update empleado 
-				set Nombre='$obj->nombre',
-				IdPuesto = '$obj->IdPuesto',
-				WHERE Id='$obj->id'");
-			 $consulta->execute();
-			return $consulta->fetch();*/
+		$query = "update empleado set Nombre ='$obj->nombre', IdPuesto = '$obj->idPuesto' WHERE Id = '$obj->id'"	;
+		$consulta = $objetoAccesoDato->RetornarConsulta($query);
+        $consulta->execute();		
+		return $consulta->fetch();
 }
 	  
 /*
