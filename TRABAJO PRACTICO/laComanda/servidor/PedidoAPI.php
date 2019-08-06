@@ -1,7 +1,7 @@
 <?php
 include("laComanda/clases/Pedido.php");
 include("laComanda/clases/IApiPedido.php");
-
+include("laComanda/clases/PDF.php");
 class PedidoAPI extends Pedido implements IApiPedido{
 
     function __construct(){
@@ -382,6 +382,12 @@ class PedidoAPI extends Pedido implements IApiPedido{
     public function listaPedidos($request, $response){              
            $pedidos = Pedido::v_listaPedidos();
            Tabla::mostrarTablaPedido($pedidos);             
+    }
+
+    public function exportarPDF($request, $response){
+        $pedidos = Pedido::v_listaPedidos();
+        $pdf = myPDF::exportarPDF($pedidos);
+        
     }
 
     public function listaPedidoPorSectorEmpleado($request, $response){

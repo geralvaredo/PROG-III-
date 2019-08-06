@@ -1,7 +1,7 @@
 <?php
- $fileName = "export_excel" .  ".xls" ;        
+ /*$fileName = "export_excel" .  ".xls" ;        
  header("Content-Disposition: attachment; filename=\"$fileName\"");
- header("Content-Type: application/vnd.ms-excel");
+ header("Content-Type: application/vnd.ms-excel");*/
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
  
@@ -19,6 +19,7 @@ require_once 'laComanda/clases/EstadoAPI.php' ;
 require_once 'laComanda/clases/Factura.php' ;
 require_once 'laComanda/clases/Foto.php' ;
 require_once 'laComanda/clases/Tabla.php' ;
+require_once 'laComanda/clases/PDF.php' ;
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -78,6 +79,8 @@ $app->group('', function(){
     });
     $this->group('/', function () {
         $this->get('pedidos', \PedidoAPI::class . ':listaPedidos');
+        $this->get('pedidoPDF', \PedidoAPI::class . ':exportarPDF');
+        
        $this->get('pedidoMasVendido', \PedidoAPI::class . ':listaPedidoMasVendido');
        $this->get('pedidoMenosVendido', \PedidoAPI::class . ':listaPedidoMenosVendido');
        $this->get('pedidosDemorados', \PedidoAPI::class . ':entregasDemoradas'); 

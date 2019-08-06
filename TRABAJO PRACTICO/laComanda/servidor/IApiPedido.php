@@ -20,6 +20,7 @@ interface IApiPedido{
     public function enviarFoto($request,$response) ;
     public function modificarFoto($request,$response);
     public function bajaFoto($request,$response)  ;
+    public function exportarPDF($request, $response);
     
 }
 
