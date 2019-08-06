@@ -175,9 +175,9 @@ class Pedido
        	return $response ;    
 	}
 
-	public static function cancelar($ped){
+	public static function cerrar($ped,$est){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE pedido set estado = 8 where id = '$ped'");
+		$consulta = $objetoAccesoDato->RetornarConsulta("UPDATE pedido set estado = '$est' where id = '$ped'");
 		return $consulta->execute();
 	}
 
@@ -224,6 +224,13 @@ class Pedido
 			else	
 				return false ;
 	}
+
+	public static function traerEstimacion($idPed){
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("SELECT tiempo from pedido WHERE id= '$idPed'");	
+		$consulta->execute();
+		return $consulta->fetchAll();
+		}
 
 	public static function modificar($p,$prodModif){
 		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 

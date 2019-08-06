@@ -144,7 +144,14 @@ class PedidoAPI extends Pedido implements IApiPedido,iExport{
                $pedidoOK = Pedido::pedidoEnPreparacion($hora,$estado,$pedido,$producto);
             }
             if($estado == 3){
-                $pedidoOK = Pedido::pedidoParaServir($hora,$estado,$pedido,$producto);
+                $horaFin = Pedido::traerEstimacion($pedido);
+                if($horaFin != NULL){
+                    $pedidoOK = Pedido::pedidoParaServir($hora,$estado,$pedido,$producto);
+                }
+                else {
+                    $clase->respuesta = "Debe estimar cuanto tardara el pedido antes de servirlo" ;
+                }
+                
             }   
             
         if($pedidoOK){
@@ -199,15 +206,32 @@ class PedidoAPI extends Pedido implements IApiPedido,iExport{
         $obj = $request->getParsedBody();
         $clase = new stdclass();
         $idPedido = $obj['pedido'];
-        $existe = Pedido::traePedidoExistente($idPedido);
-        
+        $estado = $obj['estado'] ;
+        $existe = Pedido::traePedidoExistente($idPedido);        
         if($existe != null){
-            $cancelarOk = Pedido::cancelar($idPedido);
-            if($cancelarOk){
-            $clase->respuesta = "El pedido fue cancelado exitosamente" ;
-            }else {
-            $clase->respuesta = "No se ha podido cancelar el pedido, intentelo de nuevo" ;
+            switch ($estado) {
+                case 7:
+                        $pedidoCerrado = Pedido::cerrar($idPedido,$estado);
+                        if($pedidoCerrado){
+                            $clase->respuesta = "El pedido ya fue cerrado exitosamente" ;
+                        }else {
+                            $clase->respuesta = "El pedido no se pudo cerrar, intentelo de nuevo" ;
+                        }                        
+                    break;
+                case 8:
+                        $cancelarOk = Pedido::cerrar($idPedido,$estado);
+                        if($cancelarOk){
+                            $clase->respuesta = "El pedido fue cancelado exitosamente" ;
+                            }else {
+                            $clase->respuesta = "No se ha podido cancelar el pedido, intentelo de nuevo" ;
+                            }
+                    break;
+                default:
+                    # code...
+                    break;
             }
+            
+            
         }else {
             $clase->respuesta = "No existe el pedido ingresado, intentelo de nuevo" ;
         }       
@@ -438,7 +462,7 @@ class PedidoAPI extends Pedido implements IApiPedido,iExport{
             $rest = substr($clase->respuesta,0,-2);
             $clase->respuesta = $rest ;
         }    
-        $newResponse = $response->withJson($clase,200);
+        $newResponse = $response->withJson($pedido,200);
         return $newResponse;       
         
     }

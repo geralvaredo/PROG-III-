@@ -19,7 +19,8 @@ interface IApiPedido{
     public function cancelaciones($request,$response) ;
     public function enviarFoto($request,$response) ;
     public function modificarFoto($request,$response);
-    public function bajaFoto($request,$response)  ;    
+    public function bajaFoto($request,$response)  ;
+    public function cancelarPedido($request, $response) ;    
     
 }
 
