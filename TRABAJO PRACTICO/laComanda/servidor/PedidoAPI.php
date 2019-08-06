@@ -462,7 +462,7 @@ class PedidoAPI extends Pedido implements IApiPedido,iExport{
             $rest = substr($clase->respuesta,0,-2);
             $clase->respuesta = $rest ;
         }    
-        $newResponse = $response->withJson($pedido,200);
+        $newResponse = $response->withJson($clase,200);
         return $newResponse;       
         
     }
