@@ -2,147 +2,69 @@
 class Mesa
 {
 	public $id;
- 	public $idPedido;
+ 	public $idCliente;
+	public $estado ;  
+
+	function __construct($idM,$idC,$est){
+		 $this->id = $idM ;
+		 $this->idCliente = $idC ;
+		 $this->estado = $est ;
+	 }
   	
-  	
-	  public static function traerEmpleados()
-	  {
+	public static function consultaMesa($idMesa){
 			  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			  $consulta =$objetoAccesoDato->RetornarConsulta("select Id,IdPedido as Pedido from mesa");
+			  $consulta =$objetoAccesoDato->RetornarConsulta("select idCliente from mesa where Id ='$idMesa'");
 			  $consulta->execute();			
-			  return $consulta->fetchAll(PDO::FETCH_CLASS, "mesa");		
-	  }
-/*
-  	public function BorrarUsuario()
-	 {
+			  return $consulta->fetchAll(PDO::FETCH_ASSOC);		
+	}
 
+	public static function solicitud($mesa){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("
-				delete 
-				from usuario 				
-				WHERE Id=:id");	
-				$consulta->bindValue(':id',$this->Id, PDO::PARAM_INT);		
-				$consulta->execute();
-				return $consulta->rowCount();
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE mesa set idCliente = '$mesa->idCliente', estado = '$mesa->estado' where Id = '$mesa->id'");
+			return $consulta->execute();		 
+	}
 
-	 }*/
-	 	/*public static function BorrarUsuarioPorAnio($año)
-	 {
-
+	public static function mesaPorIdCliente($idC){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("
-				delete 
-				from cds 				
-				WHERE jahr=:anio");	
-				$consulta->bindValue(':anio',$año, PDO::PARAM_INT);		
-				$consulta->execute();
-				return $consulta->rowCount();
+			$consulta =$objetoAccesoDato->RetornarConsulta("select Id,idCliente,estado from mesa where IdCliente ='$idC'");
+			$consulta->execute();		
+			return $consulta->fetchObject();
+	}
 
-	 }*/
-	 /*
-	public function ModificarUsuario()
-	 {
-
+	public static function actualizarMesa($est,$idM){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("
-				update usuario 
-				set Nombre='$this->Nombre',
-				 Clave = '$this->Clave',
-				WHERE Id='$this->Id'");
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE mesa set estado = '$est'  where Id = '$idM'");
+			return $consulta->execute();		 
+	}
+		
+	public static function modificar($mesa,$valor){
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE mesa set Id = '$valor'  where Id = '$mesa'");
 			return $consulta->execute();
-
-}*//*
-	 public function ModificarUsuarioParametros()
-	 {
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("
-				update usuario 
-				set Id= :id,
-				Nombre=: nombre,
-				Clave=: clave
-				WHERE Id=:id");
-			$consulta->bindValue(':id',$this->Id, PDO::PARAM_INT);
-			$consulta->bindValue(':nombre',$this->Nombre, PDO::PARAM_STR);
-			$consulta->bindValue(':clave', $this->Clave, PDO::PARAM_STR);
-			
-			return $consulta->execute();
-	 }*/
-/*
-  	public function mostrarDatos()
-	{
-	  	return "Metodo mostar:".$this->Id."  ".$this->Nombre ."  ". $this->Clave;
-}*//*
-	 public function InsertarElCd()
-	 {
-				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-				$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into usuario (Nombre,Clave)values('$this->Nombre','$this->Clave)");
-				$consulta->execute();
-				return $objetoAccesoDato->RetornarUltimoIdInsertado();
-				
-
-}*//*
-	 public function InsertarElCdParametros()
-	 {
-				$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-				$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into usuario (Nombre,Clave)values(:nombre,:clave)");
-				$consulta->bindValue(':nombre',$this->titulo, PDO::PARAM_STR);
-				$consulta->bindValue(':clave', $this->año, PDO::PARAM_STR);
-				
-				$consulta->execute();		
-				return $objetoAccesoDato->RetornarUltimoIdInsertado();
-	 }*/
-	 
- 	
-/*
-	public static function TraerUnCd($id) 
-	{
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("select id, titel as titulo, interpret as cantante,jahr as año from cds where id = $id");
-			$consulta->execute();
-			$cdBuscado= $consulta->fetchObject('cd');
-			return $cdBuscado;				
-
-			
 	}
-*//*
-	public static function TraerUnCdAnio($id,$anio) 
-	{
-			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("select  titel as titulo, interpret as cantante,jahr as año from cds  WHERE id=? AND jahr=?");
-			$consulta->execute(array($id, $anio));
-			$cdBuscado= $consulta->fetchObject('cd');
-      		return $cdBuscado;				
 
-			
+	public static function insertarMesa($mesa){
+			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			$consulta =$objetoAccesoDato->RetornarConsulta("INSERT INTO  mesa (Id,IdCliente,estado) values ('$mesa->id','$mesa->idCliente','$mesa->estado')");
+			return $consulta->execute();		 
 	}
-*//*
-	public static function TraerUnCdAnioParamNombre($id,$anio) 
-	{
+		
+	public static function mesaExistente($m){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("select  titel as titulo, interpret as cantante,jahr as año from cds  WHERE id=:id AND jahr=:anio");
-			$consulta->bindValue(':id', $id, PDO::PARAM_INT);
-			$consulta->bindValue(':anio', $anio, PDO::PARAM_STR);
+			$consulta =$objetoAccesoDato->RetornarConsulta("select Id FROM mesa where Id = '$m'");
 			$consulta->execute();
-			$cdBuscado= $consulta->fetchObject('cd');
-      		return $cdBuscado;				
-
-			
+			return $consulta->fetchObject();				 
 	}
-	*//*
-	public static function TraerUnCdAnioParamNombreArray($id,$anio) 
-	{
+
+	public static function eliminar($mesa){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-			$consulta =$objetoAccesoDato->RetornarConsulta("select  titel as titulo, interpret as cantante,jahr as año from cds  WHERE id=:id AND jahr=:anio");
-			$consulta->execute(array(':id'=> $id,':anio'=> $anio));
-			$consulta->execute();
-			$cdBuscado= $consulta->fetchObject('cd');
-      		return $cdBuscado;				
+			$consulta =$objetoAccesoDato->RetornarConsulta("DELETE FROM mesa where Id = '$mesa'");
+			return $consulta->execute();		 
+	}
 
-			
-	}*/
+	
 
-
-
+	
 }
 
 

@@ -1,98 +1,101 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
+ 
+require_once 'composer/vendor/autoload.php';
+require_once 'clases/UsuarioAPI.php' ;
+require_once 'clases/PedidoAPI.php' ;
+require_once 'clases/MesaAPI.php';
+require_once 'clases/ProductoAPI.php' ;
+require_once 'clases/AutentificadorJWT.php' ;
+require_once 'clases/MiddlewareAPI.php' ;
+require_once 'clases/PedidoPuesto.php' ;
+require_once 'clases/EncuestaAPI.php' ;
+require_once 'clases/PuestoAPI.php' ;
+require_once 'clases/EstadoAPI.php' ;
+require_once 'clases/Factura.php' ;
+require_once 'clases/Foto.php' ;
+require_once 'clases/Tabla.php' ;
 
-require_once './vendor/autoload.php';
-require_once ("clases/EmpleadoAPI.php");
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
 
-/*
-¡La primera línea es la más importante! A su vez en el modo de 
-desarrollo para obtener información sobre los errores
- (sin él, Slim por lo menos registrar los errores por lo que si está utilizando
-  el construido en PHP webserver, entonces usted verá en la salida de la consola 
-  que es útil).
-
-  La segunda línea permite al servidor web establecer el encabezado Content-Length, 
-  lo que hace que Slim se comporte de manera más predecible.
-*/
-
 $app = new \Slim\App(["settings" => $config]);
 
+$_REQUEST['perfil'] = "" ;
+$_REQUEST['token'] = "" ;
+$app->group('', function(){ 
+   
+   $this->post("/altaUsuario",\UsuarioAPI::class . ':insertarUsuario');
+   $this->post("/login",\UsuarioAPI::class . ':tokenUsuario')->add(\MiddlewareAPI::class . ':loginUsuario');  
+  
+   $this->group('/', function (){        
+       
+       $this->post('asignacion', \PedidoAPI::class . ':asignarEmpleado')->add(\MiddlewareAPI::class . ':VerificarPerfilUsuario');
+       $this->post('altaPedido', \PedidoAPI::class . ':insertarPedido')->add(\MiddlewareAPI::class . ':VerificarUsuario');       
+       $this->post('altaProducto', \ProductoAPI::class . ':insertarProd')->add(\MiddlewareAPI::class . ':VerificarPerfilUsuario');
+       $this->post('altaFoto', \PedidoAPI::class . ':enviarFoto');
+       $this->post('altaMesa', \MesaAPI::class . ':mesaNueva');
+       $this->post('altaPuesto', \PuestoAPI::class . ':insertarPuesto');
+       $this->post('altaEncuesta', \EncuestaAPI::class . ':insertarEncuesta');
+       $this->post('altaEstado', \EstadoAPI::class . ':insertarEstado');
+       $this->get('solicitarMesa', \MesaAPI::class . ':solicitudMesa');
+       $this->post('estadoMesa', \MesaAPI::class . ':estado')->add(\MiddlewareAPI::class . ':VerificarPerfilUsuario');
+       
+   });
+   $this->group('/', function () {
 
-$app->get('[/]', function (Request $request, Response $response) {    
-    $response->getBody()->write("GET => Bienvenido!!! a SlimFramework");
-    return $response;
+       $this->post('eliminarUsuario', \UsuarioAPI::class . ':bajaUsuario')->add(\MiddlewareAPI::class . ':VerificarPerfilUsuario');
+       $this->post('eliminarPedido', \PedidoAPI::class . ':bajaPedido')->add(\MiddlewareAPI::class . ':VerificarUsuario');
+       $this->post('eliminarMesa', \MesaAPI::class . ':bajaMesa');
+       $this->post('eliminarFoto', \PedidoAPI::class . ':bajaFoto');
+       $this->post('eliminarProducto', \ProductoAPI::class . ':bajaProducto')->add(\MiddlewareAPI::class . ':VerificarPerfilUsuario');
+       $this->post('eliminarEncuesta', \EncuestaAPI::class . ':bajaEncuesta');
+       $this->post('eliminarPuesto', \PuestoAPI::class . ':bajaPuesto')->add(\MiddlewareAPI::class . ':VerificarPerfilUsuario');
+       $this->post('eliminarEstado', \EstadoAPI::class . ':bajaEstado');
+       $this->post('eliminarAsignacion', \PedidoAPI::class . ':bajaAsignacion')->add(\MiddlewareAPI::class . ':VerificarPerfilUsuario');
+   });
 
-});
+    $this->group('/', function () {
 
-/*
-COMPLETAR POST, PUT Y DELETE
-*/
-$app->group("/empleado", function(){
-    $this->get("/",\EmpleadoAPI::class . ':listar');
-    $this->post("/{id}",\EmpleadoAPI::class . ':listarEmpleado');
-    $this->post("/",\EmpleadoAPI::class . ':insertarEmpleado');
-    $this->delete("/{id}",\EmpleadoAPI::class . ':borrarEmpleado');
-    $this->put("/",\EmpleadoAPI::class . ':modificarEmpleado');
-});
-
-/*
-$app->post('/empleado/{id}', function (Request $request, Response $response,$args) {    
-    $id = $args['id'];
-    $response->getBody()->write("Listado De Empleados:");
-    $objeto = new EmpleadoAPI();    
-    return $empleados = $objeto->listarEmpleado($request,$response,$id) ; 
-});
-
-$app->post('/insertar', function (Request $request, Response $response) {    
-    $obj = $request->getParsedBody();
-    $nombre = $obj['nombre'];
-    $idPuesto = $obj['idPuesto'];
-    $objeto = new EmpleadoAPI();
-    $objeto->nombre = $nombre ;   
-    $objeto->IdPuesto = $idPuesto ;
-    return $empleados = $objeto->insertarEmpleado($request,$response,$objeto) ;
-});
-
-$app->delete('/empleado/{id}', function (Request $request, Response $response, $args) {    
-    $id = $args['id'];    
-    $objeto = new EmpleadoAPI();    
-    return $empleados = $objeto->borrarEmpleado($request,$response,$id) ;
-
-});
-
-$app->put('/empleado', function (Request $request, Response $response) {    
-    $obj = $request->getParsedBody();
-    $nombre = $obj['nombre'];
-    $idPuesto = $obj['idPuesto'];
-    $objeto = new EmpleadoAPI();
-    $objeto->nombre = $nombre;
-    $objeto->IdPuesto = $idPuesto ;
-    return $empleados = $objeto->modificarEmpleado($request,$response,$objeto);
-
-});
-*/
-/*
-$app->put('/empleado', function (Request $request, Response $response) {    
-    $response->getBody()->write("Listado De Empleados:");
-    
-    return $response;
-
-});
-
-$app->delete('/empleado', function (Request $request, Response $response) {    
-    $response->getBody()->write("Listado De Empleados:");
-    
-    return $response;
-
-});
-*/
-
-/*
-MAS CODIGO AQUI...
-*/
-
+      $this->post("modificarUsuario",\UsuarioAPI::class . ':modifUsuario');
+      $this->post("modificarPedido",\PedidoAPI::class . ':modifPedido');
+      $this->post("cancelacionPedido",\PedidoAPI::class . ':cancelarPedido');
+      $this->post('modificarMesa', \MesaAPI::class . ':modifMesa');
+      $this->post('modifFoto', \PedidoAPI::class . ':modificarFoto');
+      $this->post('modificarProducto', \ProductoAPI::class . ':modifProducto');
+      $this->post('modificarEncuesta', \EncuestaAPI::class . ':modifEncuesta');
+      $this->post('modificarPuesto', \PuestoAPI::class . ':modifPuesto');
+      $this->post('modificarEstado', \EstadoAPI::class . ':modifEstado');
+      $this->post('reasignar', \PedidoAPI::class . ':reasignarEmpleado');
+      $this->post('estadoPedido', \PedidoAPI::class . ':cambioPedido'); 
+      $this->post('estimacionPedido', \PedidoAPI::class . ':estimacion'); 
+  
+    });
+    $this->group('/', function () {
+        $this->get('pedidos', \PedidoAPI::class . ':listaPedidos');
+       $this->get('pedidoMasVendido', \PedidoAPI::class . ':listaPedidoMasVendido');
+       $this->get('pedidoMenosVendido', \PedidoAPI::class . ':listaPedidoMenosVendido');
+       $this->get('pedidosDemorados', \PedidoAPI::class . ':entregasDemoradas'); 
+       $this->get('pedidosCancelados', \PedidoAPI::class . ':cancelaciones');       
+       $this->get('mesaMuyUsada', \MesaAPI::class . ':mesaMasUsada') ;
+       $this->get('mesaPocoUsada', \MesaAPI::class . ':mesaMenosUsada') ;
+       $this->get('mesaMayorImporte', \MesaAPI::class . ':mesaConMayorFactura') ; 
+       $this->get('mesaMenorImporte', \MesaAPI::class . ':mesaConMenorFactura') ; 
+       $this->get('mesaMasFacturada', \MesaAPI::class . ':mesaMasFact') ;
+       $this->get('mesaMenosFacturada', \MesaAPI::class . ':mesaMenosFact') ;       
+       $this->post('facturacionEspecifica', \MesaAPI::class . ':facturacionMesa') ;
+       $this->get('mejoresComentarios', \EncuestaAPI::class . ':mesaMenosUsada') ;
+       $this->get('peoresComentarios', \EncuestaAPI::class . ':mesaMenosUsada') ;
+       $this->get('clientes', \UsuarioAPI::class . ':listadoClientes');  
+       $this->get('listadoPedidos', \PedidoAPI::class . ':pedidosIdEmpleado');
+       $this->get('listaEmpleados', \UsuarioAPI::class . ':listarEmpleados');
+       $this->post('listaOperacionSector', \PedidoAPI::class . ':listaPedidoPorSectorEmpleado');
+       $this->get('listaOperacionEmpleado', \PedidoAPI::class . ':listaPedidoPorEmpleado'); 
+       $this->post('listaOperacionPuesto', \PedidoAPI::class . ':listaPedidoPorSector');
+    });
+   //
+  });
 
 $app->run();
+?>
