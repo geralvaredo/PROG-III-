@@ -1,0 +1,60 @@
+V_HORARIOS
+CREATE VIEW v_horarios as SELECT h.fecha, h.ingreso, h.egreso , e.nombre , e.apellido , p.nombre as Puesto
+from horarios h , usuario e , puesto p 
+where h.IdEmpleado = e.id AND
+p.Id = e.id
+
+V_ASIGNACION
+SELECT p.id, concat (u.nombre, ' ' , u.apellido) as cliente , prod.descripcion 
+from pedido p , usuario u, producto prod 
+where p.idCliente = u.id AND
+p.productoId = prod.codigo
+
+V_PEDIDOASIGNADO		  
+												  
+CREATE VIEW v_pedidoAsignado as select  p.fecha , p.id as Pedido, pr.descripcion as producto, e.Nombre as Estado ,  concat (u.nombre, ' ' , u.apellido) as empleado
+from pedido p ,   producto pr , estado e , pedido_puesto pp , usuario u
+where   p.estado = e.Id  and
+        p.productoId = pr.codigo AND
+        pp.idProducto = p.productoId and 
+        pp.idEmpleado = u.id
+
+
+V_PEDIDOS
+SELECT p.fecha AS fecha, p.id AS nroPedido,concat(u.nombre,' ',u.apellido) AS Cliente,
+			e.Nombre AS Estado, p.tiempo AS tiempo, pr.descripcion AS Producto, p.cantidad AS cantidad
+			 from (((pedido p join usuario u) join estado e) 
+			 join producto pr)
+			 where p.idCliente = u.id and p.estado = e.Id and p.productoId = pr.codigo
+
+
+
+												  
+												  
+CLIENTE 
+-----------
+LOGUEO 
+SOLICITUD DE MESA
+ALTA DE PEDIDO 
+
+--------------
+VENDEDOR
+ASIGNACION (MOZO O SOCIO)
+ALTA DE FOTO
+ASIGNACION DE PEDIDOS
+CAMBIO DE PEDIDO
+ESTIMACION
+PEDIDO LISTO 
+ESTADO MESA 5 
+ESTADO MESA 6 (FACTURACION)
+ESTADO MESA 7 (MESA CERRADA)
+ENCUESTA
+
+OTRAS
+REASIGNAR EMPLEADO
+
+
+
+
+
+	  

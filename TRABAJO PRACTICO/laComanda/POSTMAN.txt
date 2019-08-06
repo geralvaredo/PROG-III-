@@ -1,0 +1,202 @@
+
+
+---------------------------------------------
+ALTAS |
+-------
+ALTA USUARIO (REALIZADO)
+http://localhost/laComanda/altaUsuario
+
+LOGIN(HORARIOS) (REALIZADO)
+http://localhost/laComanda/login
+
+ALTA PEDIDO (REALIZADO)
+http://localhost/laComanda/altaPedido
+
+ALTA MESA (REALIZADO)
+http://localhost/laComanda/altaMesa
+
+ALTA PRODUCTO (REALIZADO)
+http://localhost/laComanda/altaProducto
+
+ALTA FOTO (REALIZADO)
+http://localhost/laComanda/altaFoto
+
+ALTA ENCUESTA (REALIZADO)
+http://localhost/laComanda/altaEncuesta
+
+ALTA PUESTO (REALIZADO)
+http://localhost/laComanda/altaPuesto
+
+ALTA ESTADO (REALIZADO)
+http://localhost/laComanda/altaEstado
+
+ASIGNACION DE EMPLEADO (REALIZADO)
+http://localhost/laComanda/asignacion
+
+ALTA DE FACTURA
+http://localhost/laComanda/estadoMesa
+
+MESA DISPONIBLE
+http://localhost/laComanda/estadoMesa
+
+----------------------------------------------------------------------
+
+BAJAS
+---------
+BAJA DE USUARIO  (REALIZADO)
+http://localhost/laComanda/eliminarUsuario
+
+LOGOUT (HORARIOS) (REALIZADO)
+http://localhost/laComanda/login
+
+BAJA PEDIDO (REALIZADO)
+http://localhost/laComanda/eliminarPedido
+
+BAJA MESA  (REALIZADO)
+http://localhost/laComanda/eliminarMesa
+
+BAJA PRODUCTO (REALIZADO)
+http://localhost/laComanda/eliminarProducto
+
+BAJA FOTO (REALIZADO)
+http://localhost/laComanda/eliminarFoto
+
+BAJA ESTADO (REALIZADO)
+http://localhost/laComanda/eliminarEstado
+
+BAJA ENCUESTA (REALIZADO)
+http://localhost/laComanda/eliminarEncuesta
+
+BAJA PUESTO (REALIZADO)
+http://localhost/laComanda/eliminarPuesto
+
+BAJA DE ASIGNACION DE EMPLEADO  (REALIZADO)
+http://localhost/laComanda/eliminarAsignacion
+
+CERRAR MESA
+http://localhost/laComanda/estadoMesa
+
+BAJA DE FACTURA
+
+
+----------------------------------------------------------------------
+
+MODIFICACION
+------------
+
+MODIFICACION DE USUARIO (REALIZADO)
+http://localhost/laComanda/modificarUsuario
+
+MODIFICACION DE PEDIDO (REALIZADO)
+http://localhost/laComanda/modificarPedido
+
+MODIFICACION DE MESA (REALIZADO)
+http://localhost/laComanda/modificarMesa
+
+MODIFICACION DE PRODUCTO  (REALIZADO)
+http://localhost/laComanda/modificarProducto
+
+MODIFICACION DE FOTO (REALIZADO)
+http://localhost/laComanda/modifFoto
+
+MODIFICACION DE ENCUESTA (REALIZADO)
+http://localhost/laComanda/modificarEncuesta
+
+MODIFICACION DE PUESTO (REALIZADO)
+http://localhost/laComanda/modificarPuesto
+
+MODIFICACION DE ESTADO (REALIZADO)
+http://localhost/laComanda/modificarEstado
+
+MODIFICACION DE ASIGNACION DE EMPLEADO 
+http://localhost/laComanda/reasignar
+
+ESTADO PEDIDO  (REALIZADO)
+http://localhost/laComanda/estadoPedido
+
+CANCELACION DE PEDIDO (REALIZADO)
+http://localhost/laComanda/cancelacionPedido 
+
+SERVIR MESA (REALIZADO)
+http://localhost/laComanda/servirMesa
+
+SOLICITAR MESA  (REALIZADO)
+http://localhost/laComanda/solicitarMesa
+
+MODIFICACION DE FACTURA
+
+
+----------------------------------------------------------------------
+
+
+
+
+
+---------------------------------------------------------------------
+
+ LISTAR
+
+LISTAR EMPLEADOS (REALIZADO)
+http://localhost/laComanda/listaEmpleados
+
+LISTAR PEDIDOS  (REALIZADO)
+http://localhost/laComanda/listadoPedidos
+
+LISTAR EMPLEADOS CON LOS HORARIOS DE INGRESO Y EGRESO  (REALIZADO)
+http://localhost/laComanda/empleadoHoras
+
+OPERACIONES POR PUESTOS (REALIZADO)
+http://localhost/laComanda/listaOperacionPuesto
+
+OPERACIONES POR PUESTOS LISTADA POR CADA EMPLEADO  (REALIZADO)
+http://localhost/laComanda/listaOperacionSector
+
+OPERACIONES DE CADA UNO POR SEPARADO (REALIZADO)
+http://localhost/laComanda/listaOperacionEmpleado
+
+PEDIDO MAS VENDIDO (REALIZADO) 
+http://localhost/laComanda/pedidoMasVendido
+
+PEDIDOS MENOS VENDIDO  (REALIZADO)
+http://localhost/laComanda/pedidoMenosVendido
+
+PEDIDOS DEMORADOS (REALIZADO)
+http://localhost/laComanda/pedidosDemorados
+
+PEDIDOS CANCELADOS (REALIZADO)
+http://localhost/laComanda/pedidosCancelados
+
+MESAS MAS USADAS (REALIZADO)
+http://localhost/laComanda/mesaMuyUsada
+
+MESA MENOS USADA  (REALIZADO)
+http://localhost/laComanda/mesaPocoUsada
+
+MESA MAS FACTURADA (REALIZADO)
+http://localhost/laComanda/mesaMasFacturada
+
+MESA MENOS FACTURADA (REALIZADO)
+http://localhost/laComanda/mesaMenosFacturada
+
+MESA CON FACTURA DE MAYOR IMPORTE  (REALIZADO)
+http://localhost/laComanda/mesaMayorImporte
+
+MESA CON FACTURA DE MENOR IMPORTE (REALIZADO)
+http://localhost/laComanda/mesaMenorImporte
+
+FACTURACION DE MESA ENTRE FECHAS (REALIZADO)
+http://localhost/laComanda/facturacionEspecifica
+
+MEJORES COMENTARIOS 
+
+PEORES COMENTARIOS (24-02)
+
+PROMEDIO MENSUAL DE IMPORTE 
+
+PROMEDIO MENSUAL DE MESA
+
+SUBIRLO AL HOST LUNES 
+
+
+
+

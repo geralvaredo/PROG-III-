@@ -1,0 +1,21 @@
+
+
+000WEBHOST.COM 
+
+BASE DE DATOS NOMBRE: id7674736_lacomanda
+USUARIO BASE DE DATOS : id7674736_coman
+Host de Base de datos: localhost	
+host FTP : files.000webhost.com
+usuario FTP : comandita
+
+DOMINIO: https://comandita.000webhostapp.com/
+
+HOSTINGER
+
+BASE DE DATOS NOMBRE: u790025365_coman
+USUARIO : u790025365_coman
+
+HOST FTP: srv158.main-hosting.eu
+USUARIO FTP: u790025365
+
+DOMINIO: http://lacomanda.online/laComanda/

@@ -1,0 +1,32 @@
+
+
+table{
+    width: 100%;
+
+}
+
+th {
+    background-color: #4CAF50;
+    color: cornsilk;   
+  }
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    
+  }
+
+
+
+table , th , td{
+    border: 2px double;
+   border-color: goldenrod ;
+}
+
+th{
+    height: 50px;
+}
+
+button{
+    position: center;
+}
