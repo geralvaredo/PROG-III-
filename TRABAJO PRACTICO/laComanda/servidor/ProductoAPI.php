@@ -2,7 +2,7 @@
 include("laComanda/clases/Producto.php");
 include("laComanda/clases/IApiProducto.php");
 
-class ProductoAPI extends Producto implements IApiProducto
+class ProductoAPI extends Producto implements IApiProducto,iExport
 {
     function __construct()
     {
@@ -77,5 +77,21 @@ class ProductoAPI extends Producto implements IApiProducto
 
         return $newResponse= $response->withJson($clase, 401);
     }
+
+    public function exportPDF($request, $response){
+        $producto = Producto::traeProducto();
+        $pdf = myPDF::exportarPDF($request,$response,$producto,'productos');
+        $newResponse = $response->withJson($pdf,200);
+        return $newResponse;
+    }
+
+    public function exportExcel($request, $response){
+        $producto = Producto::traeProducto();
+        $pdf = myPDF::exportarExcel($request,$response,$producto,'productos');
+        $newResponse = $response->withJson($pdf,200);
+        return $newResponse;
+    }
+
+
 }
 ?>

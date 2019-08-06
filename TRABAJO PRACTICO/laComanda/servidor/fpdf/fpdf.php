@@ -169,6 +169,42 @@ function __construct($orientation='P', $unit='mm', $size='A4')
 	$this->PDFVersion = '1.3';
 }
 
+function headerTable($data){
+	$this->SetFont('Times','B',12);
+	foreach ($data as $head) {		
+		$this->Cell(40,10,$head,1,0,'C');
+		$this->SetMargins(30, 70 , 0); 
+		
+		
+	}
+	
+	$this->Ln();  
+	/*$this->Cell(20,10,'FECHA',1,0,'C');
+	$this->Cell(40,10,'NRO PEDIDO',1,0,'C');
+	$this->Cell(60,10,'NOMBRE Y APELLIDO',1,0,'C');
+	$this->Cell(40,10,'ESTADO',1,0,'C');
+	$this->Cell(60,10,'PEDIDO',1,0,'C');*/
+	
+			
+}
+
+function viewTable($data){
+	$this->SetFont('Times','B',12);
+	foreach ($data as $item) {
+		foreach ($item as $clave => $valor) {
+			$this->Cell(40,10,$item[$clave],1,0,'C');
+		}
+		$this->SetMargins(30, 70 , 0); 
+		$this->Ln(10);
+		/*$this->Cell(40,10,$item[$clave],1,0,'L');
+		$this->Cell(60,10,$item[$clave],1,0,'L');
+		$this->Cell(40,10,$item[$clave],1,0,'L');
+		$this->Cell(60,10,$item[$clave],1,0,'L');*/
+		
+		
+	}
+}
+
 function SetMargins($left, $top, $right=null)
 {
 	// Set left, top and right margins
@@ -288,6 +324,7 @@ function Close()
 	$this->_enddoc();
 }
 
+
 function AddPage($orientation='', $size='', $rotation=0)
 {
 	// Start a new page
@@ -360,11 +397,21 @@ function AddPage($orientation='', $size='', $rotation=0)
 function Header()
 {
 	// To be implemented in your own inherited class
+	$this->Image('laComanda/clases/fotos/lacomanda.jpg',10,6);
+	$this->SetFont('Arial','B',14);
+	$this->Cell(276,5,'LA COMANDA',0,0,'C');
+	$this->Ln();
+	$this->SetFont('Times','',12);
+	$this->Cell(276,10,'Av Rivadavia 1200',0,0,'C');
+	$this->Ln();
 }
 
 function Footer()
 {
 	// To be implemented in your own inherited class
+	$this->SetY(-15);
+	$this->SetFont('Arial','',8);
+	$this->Cell(0,10,'Page'. $this->PageNo(). '/{nb}',0,0,'C');
 }
 
 function PageNo()

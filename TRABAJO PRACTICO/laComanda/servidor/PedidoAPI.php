@@ -1,8 +1,9 @@
 <?php
 include("laComanda/clases/Pedido.php");
 include("laComanda/clases/IApiPedido.php");
+include("laComanda/clases/Iexport.php");
 include("laComanda/clases/PDF.php");
-class PedidoAPI extends Pedido implements IApiPedido{
+class PedidoAPI extends Pedido implements IApiPedido,iExport{
 
     function __construct(){
     }
@@ -384,10 +385,18 @@ class PedidoAPI extends Pedido implements IApiPedido{
            Tabla::mostrarTablaPedido($pedidos);             
     }
 
-    public function exportarPDF($request, $response){
+    public function exportPDF($request, $response){
         $pedidos = Pedido::v_listaPedidos();
-        $pdf = myPDF::exportarPDF($pedidos);
-        
+        $pdf = myPDF::exportarPDF($request,$response,$pedidos,'pedidos');
+        $newResponse = $response->withJson($pdf,200);
+        return $newResponse;
+    }
+
+    public function exportExcel($request, $response){
+        $pedidos = Pedido::v_listaPedidos();
+        $pdf = myPDF::exportarExcel($request,$response,$pedidos,'pedidos');
+        $newResponse = $response->withJson($pdf,200);
+        return $newResponse;
     }
 
     public function listaPedidoPorSectorEmpleado($request, $response){
@@ -541,7 +550,7 @@ class PedidoAPI extends Pedido implements IApiPedido{
     public function marcaDeAgua($original,$nombre){
         $im = imagecreatefromjpeg($original);
         // Primero crearemos nuestra imagen de la estampa manualmente desde GD
-        $marca_agua = imagecreatefrompng("laComanda/clases/insig.png");
+        $marca_agua = imagecreatefrompng("laComanda/clases/fotos/insig.png");
         
         // Establecer los márgenes para la estampa y obtener el alto/ancho de la imagen de la estampa
         $margen_dcho = 10;

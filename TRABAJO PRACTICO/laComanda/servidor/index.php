@@ -1,7 +1,5 @@
 <?php
- /*$fileName = "export_excel" .  ".xls" ;        
- header("Content-Disposition: attachment; filename=\"$fileName\"");
- header("Content-Type: application/vnd.ms-excel");*/
+
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
  
@@ -79,8 +77,12 @@ $app->group('', function(){
     });
     $this->group('/', function () {
         $this->get('pedidos', \PedidoAPI::class . ':listaPedidos');
-        $this->get('pedidoPDF', \PedidoAPI::class . ':exportarPDF');
-        
+        $this->get('pedidoPDF', \PedidoAPI::class . ':exportPDF');
+        $this->get('pedidoExcel', \PedidoAPI::class . ':exportExcel');
+        $this->get('prodPDF', \ProductoAPI::class . ':exportPDF');
+        $this->get('prodExcel', \ProductoAPI::class . ':exportExcel');
+        $this->get('horariosPDF', \UsuarioAPI::class . ':exportPDF');
+        $this->get('horariosExcel', \UsuarioAPI::class . ':exportExcel');
        $this->get('pedidoMasVendido', \PedidoAPI::class . ':listaPedidoMasVendido');
        $this->get('pedidoMenosVendido', \PedidoAPI::class . ':listaPedidoMenosVendido');
        $this->get('pedidosDemorados', \PedidoAPI::class . ':entregasDemoradas'); 

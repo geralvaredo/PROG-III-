@@ -1,10 +1,8 @@
 <?php
 include("laComanda/clases/Mesa.php");
 include("laComanda/clases/IApiMesa.php");
-class MesaAPI extends Mesa implements IApiMesa
-{
-	
-	  
+class MesaAPI extends Mesa implements IApiMesa{
+		  
 	 function __construct()
 	 {
 	 }
@@ -43,14 +41,14 @@ class MesaAPI extends Mesa implements IApiMesa
         $obj = $request->getParsedBody();        
         $estado = $obj['estado'] ;
         $idMesa = $obj['id'] ;         
-        $facturacion = "";
-        $cambioMesaOK =  Mesa::actualizarMesa($estado,$idMesa);
-        switch ($estado) {
-            
+        $facturacion = "";        
+        switch ($estado) {            
             case 5:
+                $cambioMesaOK =  Mesa::actualizarMesa($estado,$idMesa);
                 $clase->respuesta = "El estado de la mesa se actualizo";
                 break;
            case 6:
+                    $cambioMesaOK =  Mesa::actualizarMesa($estado,$idMesa);
                     $idCliente = (Mesa::consultaMesa($idMesa)[0]['idCliente']);                
                     $idPedido = (Pedido::traerPedidoPorIdCliente($idCliente)[0]['id']);                
                     $pedidoPrecios = Pedido::pedidoPrecio($idPedido);
@@ -74,7 +72,15 @@ class MesaAPI extends Mesa implements IApiMesa
                         }
                 break;  
             case 7:    
-                    $clase->respuesta = "La mesa fue cerrada exitosamente";           
+                    $estado = Mesa::mesaEstado($idMesa);
+                    if($estado == 6){
+                        $mesa = new Mesa($idMesa,NULL,NULL);
+                        $mesaCerrada = Mesa::solicitud($mesa);
+                        $clase->respuesta = "La mesa fue cerrada exitosamente"; 
+                    }else {
+                        $clase->respuesta = "No se puede cerrar la mesa todavia, los clientes deben pagar"; 
+                    }
+                              
                     break;
             default:
                 # code...

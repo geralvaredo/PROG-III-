@@ -61,6 +61,14 @@ class Producto
 			  return $consulta->fetchAll();		
 	  }
 
+	  public static function traeProducto()
+	  {
+			  $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+			  $consulta =$objetoAccesoDato->RetornarConsulta("SELECT descripcion, precio from producto");
+			  $consulta->execute();			
+			  return $consulta->fetchAll(PDO::FETCH_ASSOC);		
+	  }
+
 	  public static function insertar($obj){
         $response = false;
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 

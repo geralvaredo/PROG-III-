@@ -52,7 +52,7 @@ class Pedido
 				"SELECT ped.fecha, u.nombre , u.apellido , p.descripcion 
 				from usuario u , producto p , pedido ped , pedido_puesto pedp
 				where u.IdPuesto = '$idP' AND
-				pedp.idEmpleado = U.id  AND
+				pedp.idEmpleado = u.id  AND
 				pedp.idPedido = ped.id AND
 				ped.productoId = p.codigo AND
 				ped.fecha = '$fec'");
@@ -67,7 +67,7 @@ class Pedido
 				"SELECT ped.fecha, u.nombre , u.apellido , p.descripcion 
 				from usuario u , producto p , pedido ped , pedido_puesto pedp
 				where u.IdPuesto = '$idP' AND
-				pedp.idEmpleado = U.id  AND
+				pedp.idEmpleado = u.id  AND
 				pedp.idPedido = ped.id AND
 				ped.productoId = p.codigo");
 				$consulta->execute();			

@@ -3,7 +3,7 @@ include("laComanda/clases/Usuario.php");
 include("laComanda/clases/IApiUsuario.php");
 
 
-class UsuarioAPI extends Usuario implements IApiUsuario{
+class UsuarioAPI extends Usuario implements IApiUsuario,iExport{
 
     function __construct()
     {
@@ -119,6 +119,19 @@ class UsuarioAPI extends Usuario implements IApiUsuario{
     public function listarEmpleados($request, $response){
         $personas = Usuario::listadoEmpleados();
         $newResponse = $response->withJson($personas,200);
+        return $newResponse;
+    }
+
+    public function exportPDF($request, $response){
+        $horarios = Horarios::horariosVista();
+        $pdf = myPDF::exportarExcel($request,$response,$horarios,'horarios');
+        $newResponse = $response->withJson($$pdf,200);
+        return $newResponse;
+    }
+    public function exportExcel($request, $response){
+        $horarios = Horarios::horariosVista();
+        $pdf = myPDF::exportarExcel($request,$response,$horarios,'horarios');
+        $newResponse = $response->withJson($pdf,200);
         return $newResponse;
     }
 }

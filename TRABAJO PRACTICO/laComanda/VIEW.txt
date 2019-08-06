@@ -1,8 +1,7 @@
-V_HORARIOS
 CREATE VIEW v_horarios as SELECT h.fecha, h.ingreso, h.egreso , e.nombre , e.apellido , p.nombre as Puesto
 from horarios h , usuario e , puesto p 
 where h.IdEmpleado = e.id AND
-p.Id = e.id
+p.Id = e.IdPuesto
 
 V_ASIGNACION
 SELECT p.id, concat (u.nombre, ' ' , u.apellido) as cliente , prod.descripcion 

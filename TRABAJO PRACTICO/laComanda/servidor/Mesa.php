@@ -31,6 +31,13 @@ class Mesa
 			return $consulta->fetchObject();
 	}
 
+	public static function mesaEstado($idM){
+		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+		$consulta =$objetoAccesoDato->RetornarConsulta("select estado from mesa where Id ='$idM'");
+		$consulta->execute();		
+		return $consulta->fetchObject();
+}
+
 	public static function actualizarMesa($est,$idM){
 			$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
 			$consulta =$objetoAccesoDato->RetornarConsulta("UPDATE mesa set estado = '$est'  where Id = '$idM'");
